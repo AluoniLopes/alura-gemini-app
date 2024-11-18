@@ -1,6 +1,4 @@
 import express, { application } from "express";
-// import dotenv from "dotenv";    
-// dotenv.config();
 
 const port = process.env.PORT || 3000;
 const api_gemini = process.env.GEMINI_APP;
