@@ -33,7 +33,7 @@ const posts = [
     },
     {
         id: 5,
-        descricao: "bom dia gato",
+        descricao: "bom dia gatonaldo",
         imagem: "https://placecats.com/g/300/150"
     },
 ];
@@ -54,7 +54,23 @@ function buscarPostporID(id) {
     })
 }
 
+app.get("/posts/search", (req, res) => {
+    const searchTerm = req.query.descricao;
+
+    if(searchTerm === undefined){
+        res.status(400).send('"descricao" nao especificado')
+    }else{
+    // Filtrando os posts que contêm o termo de busca na descrição
+    const filteredPosts = posts.filter(post => 
+        post.descricao.toLowerCase().includes(searchTerm.toLowerCase()));
+    if(filteredPosts.length > 0){
+        res.json(filteredPosts)
+    }else{
+        res.status(404).send(`404: not found`)
+    };
+}});
+
 app.get("/posts/:id", (req, res)=>{
-    const index = buscarPostporID(req.params.id)
+    const index = buscarPostporID(req.params.id);
     res.status(200).json(posts[index]);
 });
