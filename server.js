@@ -54,6 +54,18 @@ function buscarPostporID(id) {
     })
 }
 
+// Aplicando o middleware a todas as rotas com /posts/:id
+app.use('/posts/:id', (req, res, next) => {
+  const index = buscarPostporID(req.params.id);
+  if (index >= 0) {
+    req.post = posts[index]; // Adicione o post encontrado na requisição
+    next(); // Permita a requisição continuar
+  } else {
+    res.status(404).json('404: id not found');
+  }
+});
+
+// Rotas
 app.get("/posts/search", (req, res) => {
     const searchTerm = req.query.descricao;
 
@@ -71,6 +83,15 @@ app.get("/posts/search", (req, res) => {
 }});
 
 app.get("/posts/:id", (req, res)=>{
-    const index = buscarPostporID(req.params.id);
-    res.status(200).json(posts[index]);
+    res.status(200).json(req.post)
 });
+
+app.get("/posts/:id/image", (req, res)=>{
+    res.status(200).send(`
+        <figure>
+          <img src="${req.post.imagem}" alt="Minha Figura">
+          <figcaption>${req.post.descricao}</figcaption>
+        </figure>
+      `)
+});
+
