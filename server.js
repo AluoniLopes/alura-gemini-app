@@ -45,31 +45,7 @@ app.listen(PORT, ()=>{
 
 routes(app)
 
-// Funcao de rota
-// function buscarPostporID(id) {
-//     return posts.findIndex((post) => {
-//         return post.id === Number(id)
-//     })
-// };
-
 // Rotas
-
-// app.get("/posts/search", (req, res) => {    
-    //     const searchTerm = req.query.descricao;
-
-//     if(searchTerm === undefined){
-//         res.status(400).send('"descricao" nao especificado')
-//     }else{
-//     // Filtrando os posts que contêm o termo de busca na descrição
-//     const filteredPosts = posts.filter(post =>
-//         post.descricao.toLowerCase().includes(searchTerm.toLowerCase()));
-//     if(filteredPosts.length > 0){
-//         res.json(filteredPosts)
-//     }else{
-//         res.status(404).send(`404: not found`)
-//     }
-// }
-// });
 
 // app.get("/posts/:id", (req, res)=>{
 //     res.status(200).json(req.post)
