@@ -66,7 +66,7 @@ app.use('/posts/:id', (req, res, next) => {
 });
 
 // Rotas
-app.get("/posts/search", (req, res) => {
+app.get("/posts/search", (req, res) => {    
     const searchTerm = req.query.descricao;
 
     if(searchTerm === undefined){
@@ -79,8 +79,9 @@ app.get("/posts/search", (req, res) => {
         res.json(filteredPosts)
     }else{
         res.status(404).send(`404: not found`)
-    };
-}});
+    }
+}
+});
 
 app.get("/posts/:id", (req, res)=>{
     res.status(200).json(req.post)
